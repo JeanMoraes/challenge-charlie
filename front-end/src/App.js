@@ -1,11 +1,17 @@
 import React, { useState, useEffect } from 'react';
 import { open_cage } from './services/api';
 
+import './App.css';
+
+import { fetchBingImage } from "./services/bing_search_img";
+
 function App() {
 
   const [city, setCity] = useState("");
+  const [img, setIMG] = useState('');
 
   useEffect(()=>{
+    fetchBingImage().then(setIMG);
     getUserLocation();
   }, []);
 
@@ -22,7 +28,7 @@ function App() {
   }
 
   return (
-    <div className="App">
+    <div className="App" style={{ backgroundImage: `url(${img})` }}>
       CHALLENGE CHARLIE
       <p>{city}</p>
     </div>
