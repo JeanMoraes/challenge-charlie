@@ -5,7 +5,6 @@ const open_cage = axios.create({
 });
 
 const open_weather = axios.create({
-    // baseURL: 'http://api.openweathermap.org/data/2.5/weather'
     baseURL: 'https://api.openweathermap.org/data/2.5/forecast'
 });
 
