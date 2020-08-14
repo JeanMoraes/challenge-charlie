@@ -4,4 +4,9 @@ const open_cage = axios.create({
     baseURL: 'https://api.opencagedata.com/geocode/v1/json'
 });
 
-export {open_cage}
+const open_weather = axios.create({
+    // baseURL: 'http://api.openweathermap.org/data/2.5/weather'
+    baseURL: 'https://api.openweathermap.org/data/2.5/forecast'
+});
+
+export { open_cage, open_weather }
