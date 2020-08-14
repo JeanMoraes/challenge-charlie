@@ -1,8 +1,9 @@
 import React, { useState, useEffect } from 'react';
 import { open_cage, open_weather } from './services/api';
 import { AiOutlineSearch } from 'react-icons/ai';
+import { FaSpinner } from 'react-icons/fa';
 
-import { DisplayInfo, SideBar } from './style';
+import { DisplayInfo, SideBar, SubmitButton } from './style';
 import GlobalStyle from './styles/GlobalStyle';
 
 import { fetchBingImage } from "./services/bing_search_img";
@@ -12,6 +13,7 @@ function App() {
   const [city, setCity] = useState("");
   const [weather, setWeather] = useState("");
   const [img, setIMG] = useState('');
+  const [loading, setLoading] = useState(false);
 
   useEffect(()=>{
     async function initialState(){
@@ -36,11 +38,13 @@ function App() {
 
   async function getWeatherbyCity(e){
     e.preventDefault();
+    setLoading(true);
 
     const response = await open_weather.get(`?q=${city}&units=metric&APPID=${process.env.REACT_APP_API_KEY_OPEN_WEATHER}&lang=pt_br`);
     const info = response.data;
     setWeather(info);
     //console.log(info);
+    setLoading(false);
   }
 
 
@@ -69,10 +73,9 @@ function App() {
                 onChange={ e => setCity(e.target.value) }
                 autoComplete="off"
               />
-              <button type="submit">
-                <AiOutlineSearch size={30} />
-                
-              </button>
+              <SubmitButton loading={ loading ? 1 : 0}>
+                { loading ? <FaSpinner color="#FFF" size={30} /> : <AiOutlineSearch color="#FFF" size={30} /> }
+              </SubmitButton>
           </form>
           
               <br/>
