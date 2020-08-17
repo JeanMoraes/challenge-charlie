@@ -11,9 +11,6 @@ export default createGlobalStyle`
     }
 
     #root{
-        width: 100vw;
-        height: 100vh;
-
         --primary-color: #d66c05;
     }
 

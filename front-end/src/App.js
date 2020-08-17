@@ -28,11 +28,10 @@ function App() {
     navigator.geolocation.getCurrentPosition( async function(position) {
       const userPosition = {lat: position.coords.latitude, lng: position.coords.longitude};
       //console.log(userPosition);
-
+     
       const response = await open_cage.get(`?q=${userPosition.lat},${userPosition.lng}&key=${process.env.REACT_APP_API_KEY_OPEN_CAGE}`);
       const userCity = response.data.results[0].components.city;  
       setCity(userCity);
-
     });
   }
 
@@ -47,7 +46,6 @@ function App() {
     setLoading(false);
   }
 
-
   return (
     <>
     <GlobalStyle /> 
@@ -56,7 +54,7 @@ function App() {
       <DisplayInfo>
         <div className="box_info">
           <h1>
-            { weather ? Math.round(weather.list[0].main.temp) + "ºC" : ""}
+            { weather ? Math.round(weather.list[0].main.temp) + "ºC": ""}
           </h1>
           <h2>
             { weather ? weather.city.name : ""}
@@ -78,20 +76,48 @@ function App() {
               </SubmitButton>
           </form>
           
-              <br/>
-              <p> { weather ? "HOJE: " + weather.list[0].main.temp + "ºC" : ""} </p>
-              <p> { weather ? "Condições: " + weather.list[0].weather[0].description : ""} </p>
-              <p> { weather ? "Vento: " + weather.list[0].wind.speed + "Km/h" : ""} </p>
-              <p> { weather ? "Humidade: " + weather.list[0].main.humidity + "%" : ""} </p>
-              <p> { weather ? "Pressão: " + weather.list[0].main.pressure + "hPA" : ""} </p>
+        { weather && 
+          <div className="list-info">
+            <fieldset>
+              <legend>HOJE:</legend>
+              <p>{ weather.list[0].main.temp } ºC</p>
+            </fieldset>
 
-              <p> { weather ? "AMANHÃ: " + weather.list[1].main.temp + "ºC" : ""} </p>
-              <p> { weather ? "DEPOIS DE AMANHÃ: " + weather.list[2].main.temp + "ºC" : ""} </p>
+            <fieldset>
+            <legend>Condições</legend>
+            <p>{ weather.list[0].weather[0].description }</p>
+            </fieldset>
+
+            <fieldset>
+              <legend>Vento</legend>
+              <p>{ weather.list[0].wind.speed } Km/h</p>
+            </fieldset>
+
+            <fieldset>
+              <legend>Humidade</legend>
+              <p>{ weather.list[0].main.humidity } %</p>
+            </fieldset>
+
+            <fieldset>
+              <legend>Pressão</legend>
+              <p>{ weather.list[0].main.pressure } hPA</p>
+            </fieldset>
+
+            <fieldset>
+              <legend>AMANHÃ:</legend>
+              <p>{ weather.list[1].main.temp } ºC</p>
+            </fieldset>
+
+            <fieldset>
+              <legend>DEPOIS DE AMANHÃ</legend>
+              <p>{ weather.list[2].main.temp } ºC</p>
+            </fieldset>
+          </div>
+        }
          
         </div>
       </SideBar>
-
-    </div>
+      </div>
     </>
   );
 }

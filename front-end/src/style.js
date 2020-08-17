@@ -24,6 +24,12 @@ export const DisplayInfo = styled.main`
             text-shadow: 0 0 14px rgba(0,0,0,0.5);
         }
     }
+
+    @media (max-width: 1024px){
+        display: none;
+        align-items: center;
+        padding: 0;
+    }
 `;
 
 export const SideBar = styled.div`
@@ -32,7 +38,7 @@ export const SideBar = styled.div`
         justify-self: flex-end;
         flex-direction: column;
         height: 100vh;
-        padding-left: 25px;
+        padding: 0 25px 0 25px;
         background-color: rgba(255, 255, 255, 0.8);
         box-shadow: 0 0 10px rgba(0,0,0,0.18);
         backdrop-filter: blur(3px);
@@ -63,10 +69,37 @@ export const SideBar = styled.div`
                     opacity: 0.8;
                     transition: opacity 0.2s ease-in
                 }
+
+                @media (max-width: 480px){
+                    padding: 10px;
+                }
             }
         }
 
-        
+        .list-info{
+                margin-top: 15px;
+
+                fieldset{
+                    margin-top: 10px;
+                    padding: 10px;
+                    border-color: #f4f4f4;
+
+                    legend{
+                        font-weight: bold;
+                        padding: 0 15px 0 5px;
+                    }
+
+                }
+        }
+
+        @media (max-width: 1024px){
+            width: 100%;
+        }
+
+    }
+
+    @media (max-width: 1024px){
+            width: 100%;
     }
 `;
 
